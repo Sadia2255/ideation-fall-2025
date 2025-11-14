@@ -1,4 +1,4 @@
-# Final Project Proposal: TripTuner
+# Final Project Proposal: 
 
 **Team Name**: TripTuner
 **Submission Date**: 11/13/2025  
@@ -23,21 +23,25 @@
 **Skills we have:**
 - Frontend: arushiga, jevinta, rsadia, lianav
 - Backend: rsadia, lianav
-- [Skill 3]: [Who has it - names/pennkeys]
+- Data / Analysis: juzhuo, jevinta
 - [Skill 4]: [Who has it - names/pennkeys]
 
 **Skills we need to learn/acquire:**
-- [Skill 1]: [Why we need it] - [Who will learn it]
-- [Skill 2]: [Why we need it] - [Who will learn it]
-- [Skill 3]: [Why we need it] - [Who will learn it]
+- API integration (Google Places API or Foursquare): Needed for auto-filling trip location metadata. Learners: Liana, Sadia
+
+- Leaderboard + Metrics Computation: Needed to compute trip “wrapped” and upvote-weighted user rankings. Learners: Julia, Jevin
+
+- Moderation/QC automation (flagging low-effort data): Needed for quality control before aggregation. Learners: Arushi
 
 **External resources we might need:**
-- [Resource 1]: [e.g., Specific API access, dataset, tool] - [Status: requested/pending/acquired]
-- [Resource 2]: [e.g., Paid service credits] - [Status and cost estimate]
+
+- Google / Foursquare Places API — pending request
+- Vercel/Render hosting — free tier
+- MongoDB Atlas — free tier
 
 ### Team Availability for TA Meetings
 
-**Week of [Date]:**
+**Week of 11/16:**
 
 _List all time slots when the ENTIRE team can meet with a TA. Use Eastern Time. Format: Day, Time-Time_
 
@@ -49,7 +53,7 @@ _List all time slots when the ENTIRE team can meet with a TA. Use Eastern Time. 
 
 **Preferred meeting duration**: 60 min
 
-**Meeting format preference**: [In-person / Zoom / Either]
+**Meeting format preference**: [Zoom]
 
 **Primary contact for scheduling**: [Arushi Agarwal and arushiga@sas.upenn.edu]
 
@@ -94,7 +98,7 @@ If you have ever had a moment of free time in between the business of being a UP
 - [ ] Social science experiment with the crowd
 - [ ] Tool for crowdsourcing (requesters or workers)
 - [ ] Business idea using crowdsourcing
-- [selected] Other: Platform to crowdsource ideas amongst students, specific to travel within Philly/on-campus
+- [X] Other: Platform to crowdsource ideas amongst students, specific to travel within Philly/on-campus
 
 ---
 
@@ -104,7 +108,7 @@ If you have ever had a moment of free time in between the business of being a UP
 
 _Required: Include a visual flow diagram showing the major components/stages of your project_
 
-**Flow diagram location**: [e.g., `docs/flow-diagram.pdf` or embed image here]
+**Flow diagram location**: [Will include soon! We wrote it out on words]
 
 Your flow diagram MUST clearly show:
 - [ ] Where/when the crowd touches the data
@@ -116,7 +120,7 @@ Your flow diagram MUST clearly show:
 
 **If you haven't created it yet**: Describe in words the major components and their relationships:
 
-1. [Component 1] → [Component 2] → [Component 3] ...
+Over **Week 1 (Nov 14–20)**, we will finalize the system architecture and data schema, set up the backend server and MongoDB cluster, and build the basic React frontend shell, so that by the end of the week we have an app that loads core pages and connects to the database. In **Week 2 (Nov 21–27)**, we will focus on core functionality: implementing the trip submission UI for bullet-point trips and locations, creating the corresponding POST/GET endpoints, and building the QC module that filters low-effort trips and validates locations, so that users can submit trips and have them accepted or rejected by QC. During **Week 3 (Nov 28–Dec 4)**, we will implement the upvote system on both frontend and backend, build the aggregation logic that ranks trips, computes monthly “wrapped” stats, and generates the leaderboard, and integrate these into the user dashboard so that we can see preliminary rankings over sample data. In **Week 4 (Dec 5–11)**, we will recruit 20-30 Penn students as our crowd to submit trips, run QC and aggregation on real data and debug any issues, and polish the UI/UX. In the **final week**, we will focus on evaluation and packaging: complete the analysis write-up using collected data, finalize documentation and README, and prepare the final demo and presentation with the working TripTuner prototype.
 
 ### Major System Components
 
@@ -124,13 +128,14 @@ _List all major components with point values (1-4) indicating implementation com
 
 | Component | Description | Points | Owner(s) | Dependencies |
 |-----------|-------------|--------|----------|--------------|
-| [Component 1] | [Brief description] | [1-4] | [Name(s)] | [What must be done first] |
-| [Component 2] | [Brief description] | [1-4] | [Name(s)] | [What must be done first] |
-| [Component 3] | [Brief description] | [1-4] | [Name(s)] | [What must be done first] |
-| [Component 4] | [Brief description] | [1-4] | [Name(s)] | [What must be done first] |
-| [Component 5] | [Brief description] | [1-4] | [Name(s)] | [What must be done first] |
+| Trip Submission UI | Students enter bullet-point trip summaries & locations | 3 | Jevin, Arushi | Basic frontend setup |
+| Trip Database + API | Store/retrieve trips (MongoDB) | 3 | Sadia, Liana | Data model finalized |
+| QC Module | Quality filtering: min length, location validation, low-effort detection | 4 | Arushi, Sadia | Trip DB |
+| Aggregation Module | Rank trips + compute monthly wrapped + leaderboard | 4 | Julia, Liana | QC module output |
+| Upvoting / Rating System | Simple UI + backend endpoints | 4 | Jevin, Arushi | Submission UI |
+| User Dashboard | Shows feed, wrapped, leaderboard | 3 | Frontend team | Aggregation module |
 
-**Total Points**: [Sum - should be 15-20]
+**Total Points**: 20
 
 **Point allocation rationale**: 
 _If teaching staff questions your point distribution, explain your reasoning here_
@@ -139,13 +144,13 @@ _If teaching staff questions your point distribution, explain your reasoning her
 
 _Step-by-step description of how your system works from start to finish_
 
-1. **[Step 1]**: [What happens, who/what does it]
-2. **[Step 2]**: [What happens, who/what does it]
-3. **[Step 3]**: [What happens, who/what does it]
-4. **[Step 4]**: [What happens, who/what does it]
-5. **[Step 5]**: [What happens, who/what does it]
-6. **[Step 6]**: [What happens, who/what does it]
-7. **[Step 7]**: [What happens, who/what does it]
+1. **[Step 1]**: User onboarding & login - A UPenn student visits TripTuner, logs in with their Penn email, and a basic user profile is created/stored by the backend (name, class year, optional interests).
+2. **[Step 2]**: Trip creation & submission - The student fills out the “Add a Trip” form on the frontend (trip title, date, 3–7 bullet points describing what they did, key locations, optional tags like “food,” “nature,” “cheap”) and submits; the frontend sends this payload to the backend API.
+3. **[Step 3]**: Quality control check - The backend passes the new trip to the QC module, which automatically checks for minimum effort (enough bullet points/characters), required fields, location validity (basic format/API check), and low-quality or inappropriate content; if it fails, the user receives an error message explaining what to fix.
+4. **[Step 4]**: Trip storage & feed update - If the trip passes QC, it is stored in the trips collection in the database, indexed by user and location, and becomes visible in the main trip feed and searchable lists for other students to browse.
+5. **[Step 5]**: Crowd interaction (upvotes & saves) - Other UPenn students browse the trip feed, filter by tags/date/location, and interact with trips by upvoting ones they find helpful or saving them to their personal “wishlist”; these interactions are recorded as engagement events in the database.
+6. **[Step 6]**: Aggregation (wrapped + leaderboard computation) - The aggregation module periodically (or on each new interaction) processes QC-approved trips and their engagement data to compute per-user stats (number of trips, distinct locations, most-visited spots) for the monthly “wrapped,” and global stats (top-rated trips, most active contributors) for the leaderboard, storing these summaries in dedicated collections.
+7. **[Step 7]**: User dashboard & admin monitoring - When a student opens their dashboard, the frontend pulls their personalized wrapped, saved trips, and the current leaderboard from the aggregated data; in parallel, an admin view allows the team to review flagged trips, spot QC failures, and monitor overall system health and crowd activity.
 
 _Continue as needed..._
 
@@ -725,10 +730,11 @@ _Continue through your full timeline..._
 
 **Team signatures**:
 
-- _________________________ [Name], [Date]
-- _________________________ [Name], [Date]
-- _________________________ [Name], [Date]
-- _________________________ [Name], [Date]
+- Sadia Rahman, 11/13/2025
+- Liana Veerasamy, 11/13/2025
+- Jevin Ta, 11/13/2025
+- Arushi Agarwal, 11/13/2025
+- Julia Zhuo, 11/13/2025
 
 ---
 
