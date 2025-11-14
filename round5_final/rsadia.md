@@ -1,4 +1,4 @@
-# Final Project Proposal: 
+# Final Project Proposal: TripTuner
 
 **Team Name**: TripTuner
 **Submission Date**: 11/13/2025  
